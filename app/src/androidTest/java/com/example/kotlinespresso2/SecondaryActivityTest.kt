@@ -20,6 +20,9 @@ class SecondaryActivityTest{
 
         onView(withId(R.id.secondary))
             .check(matches(isDisplayed()))
+
+        // Notice this does not effect the next test
+        activityRule.scenario.moveToState(Lifecycle.State.DESTROYED)
     }
 
     @Test

@@ -12,26 +12,23 @@ import org.junit.Test
 class MainActivityTest {
 
     @Test
-    fun test_navSecondaryActivity() {
-
-        val activityScenario = ActivityScenario.launch(MainActivity::class.java) // when launch  main activity
-
-        onView(withId(R.id.button_next_activity)).perform(click()) // when button click
-        onView(withId(R.id.secondary)).check(matches(isDisplayed())) // is secondary displayed
+    fun testActivity_inView() {
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        onView(withId(R.id.main)).check(matches(isDisplayed()))
     }
 
-    /**
-     * Test both ways to navigate from SecondaryActivity to MainActivity
-     */
     @Test
-    fun test_backPress_toMainActivity() {
-
+    fun testVisibility_nextButton() {
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        onView(withId(R.id.activity_main_title)).check(matches(isDisplayed()))
+        onView(withId(R.id.activity_main_title)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
+        onView(withId(R.id.button_next_activity)).check(matches(isDisplayed()))
+    }
 
-        onView(withId(R.id.button_next_activity)).perform(click())
-        onView(withId(R.id.secondary)).check(matches(isDisplayed()))
-        //onView(withId(R.id.button_back)).perform(click()) // method 1
-        pressBack()  // method 2
-        onView(withId(R.id.main)).check(matches(isDisplayed()))
+    @Test
+    fun testTitleTextDisplayed(){
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        onView(withId(R.id.activity_main_title))
+            .check(matches(withText("MainActivity")))
     }
 }
