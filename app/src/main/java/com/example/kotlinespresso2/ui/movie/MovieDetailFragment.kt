@@ -45,11 +45,11 @@ class MovieDetailFragment : Fragment(){
 
         setMovieDetails()
 
-        movie_directiors.setOnClickListener {
+        movie_directors.setOnClickListener {
             val bundle = Bundle()
             bundle.putStringArrayList("args_directors", movie.directors)
             activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.container, DirectorsFragment::class.java, bundle)
+                ?.replace(R.id.container1, DirectorsFragment::class.java, bundle)
                 ?.addToBackStack("DirectorsFragment")
                 ?.commit()
         }
@@ -58,7 +58,7 @@ class MovieDetailFragment : Fragment(){
             val bundle = Bundle()
             bundle.putStringArrayList("args_actors", movie.star_actors)
             activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.container, StarActorsFragment::class.java, bundle)
+                ?.replace(R.id.container1, StarActorsFragment::class.java, bundle)
                 ?.addToBackStack("StarActorsFragment")
                 ?.commit()
         }
