@@ -8,16 +8,17 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.example.kotlinespresso2.R
 import com.example.kotlinespresso2.factory.MovieFragmentFactory
+import com.example.kotlinespresso2.ui.movie.DirectorsFragment.Companion.stringBuilderForDirectors
 import org.junit.Assert.*
 import org.junit.Test
 
-class DirectorsFragmentTest {
-
+class DirectorsFragmentTest{
     @Test
     fun test_isDirectorsListVisible() {
 
         // GIVEN
         val directors = arrayListOf("R.J. Stewart", "James Vanderbilt")
+        val verifyDirectorsValue = stringBuilderForDirectors(directors)
         val fragmentFactory = MovieFragmentFactory(null, null)
         val bundle = Bundle()
         bundle.putStringArrayList("args_directors", directors)
@@ -28,8 +29,6 @@ class DirectorsFragmentTest {
 
         // VERIFY
         onView(withId(R.id.directors_text))
-            .check(matches(withText(
-                DirectorsFragment.stringBuilderForDirectors(directors)
-            )))
+            .check(matches(withText(verifyDirectorsValue.toString())))
     }
 }

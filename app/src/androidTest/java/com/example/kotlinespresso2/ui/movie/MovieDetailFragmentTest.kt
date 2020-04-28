@@ -13,6 +13,7 @@ import com.example.kotlinespresso2.data.source.MoviesRemoteDataSource
 import com.example.kotlinespresso2.factory.MovieFragmentFactory
 import io.mockk.every
 import io.mockk.mockk
+import org.junit.Assert.*
 import org.junit.Test
 
 class MovieDetailFragmentTest{
@@ -63,5 +64,4 @@ class MovieDetailFragmentTest{
 
         // Checking image is more complex so we'll do in another video
     }
-
 }
