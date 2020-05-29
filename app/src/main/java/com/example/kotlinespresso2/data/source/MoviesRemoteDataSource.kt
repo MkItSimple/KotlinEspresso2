@@ -4,7 +4,7 @@ import com.example.kotlinespresso2.data.Movie
 
 class MoviesRemoteDataSource: MoviesDataSource {
 
-    private var MOVIES_REMOTE_DATA = LinkedHashMap<Int, Movie>(2)
+    public var MOVIES_REMOTE_DATA = LinkedHashMap<Int, Movie>(2)
 
     init {
         addMovie(
@@ -30,9 +30,17 @@ class MoviesRemoteDataSource: MoviesDataSource {
         )
     }
 
-    override fun getMovie(movieId: Int): Movie? {
-        return MOVIES_REMOTE_DATA[movieId]
+    override fun getMovie(movieId: Int): Movie {
+        //return MOVIES_REMOTE_DATA[movieId]!!
+        return MOVIES_REMOTE_DATA[movieId]!!
     }
+
+    fun getHello(): String {
+        //return MOVIES_REMOTE_DATA[movieId]!!
+        return "Hello"
+    }
+
+
 
     private fun addMovie(
         id: Int,
