@@ -42,9 +42,9 @@ class MovieDetailFragmentTest{
         // Probably for a larger repository and more complex app I would stub the repository. Then
         // you could test errors, various success cases, etc...
         val moviesDataSource = mockk<MoviesRemoteDataSource>()
-        every {
-            moviesDataSource.getMovie(movieId)
-        } returns movie
+//        every {
+//            moviesDataSource.getMovie(movieId)
+//        } returns movie
 
         val requestOptions = RequestOptions()
             .placeholder(R.drawable.default_image)
