@@ -1,13 +1,18 @@
 package com.example.kotlinespresso2
 
+import android.os.IBinder
+import android.view.WindowManager
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Root
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.example.kotlinespresso2.MainActivity.Companion.buildToastMessage
+import org.hamcrest.Description
+import org.hamcrest.TypeSafeMatcher
 import org.junit.Test
 
 class MainActivityTest{
@@ -40,7 +45,26 @@ class MainActivityTest{
         onView(withId(R.id.text_name)).check(matches(withText(NAME)))
 
         // Is toast displayed and is the message correct?
-//        onView(withText(buildToastMessage(NAME))).inRoot(ToastMatcher())
-//            .check(matches(isDisplayed()))
+        onView(withText(buildToastMessage(NAME))).inRoot(ToastMatcher())
+            .check(matches(isDisplayed()))
+    }
+}
+
+class ToastMatcher : TypeSafeMatcher<Root?>() {
+
+    override fun describeTo(description: Description?) {
+        description!!.appendText("is toast")
+    }
+
+    override fun matchesSafely(root: Root?): Boolean {
+        val type: Int = root!!.getWindowLayoutParams().get().type
+        if (type == WindowManager.LayoutParams.TYPE_TOAST) {
+            val windowToken: IBinder = root.getDecorView().getWindowToken()
+            val appToken: IBinder = root.getDecorView().getApplicationWindowToken()
+            if (windowToken === appToken) {
+                return true
+            }
+        }
+        return false
     }
 }
